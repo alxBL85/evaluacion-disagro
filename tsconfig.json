@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@event-platform/commons": ["./packages/commons/src/index.ts"],
+       "@event-platform/commons/*": ["./packages/commons/src/"]
+    }
+  },
+  "include": [],
+  "references": [
+    { "path": "./packages/commons" },
+    // { "path": "./apps/backend" },
+    // { "path": "./apps/frontend" }
+  ]
+}

@@ -1,0 +1,14 @@
+export const DISCOUNT_RULES = {
+  SERVICES: {
+    MIN_COUNT: 2,
+    BASE_DISCOUNT: 3,
+    PREMIUM_THRESHOLD_GTQ: 1500,
+    PREMIUM_DISCOUNT: 5,
+  },
+  PRODUCTS: {
+    BASE_MIN_COUNT: 3,
+    BASE_DISCOUNT: 3,
+    PREMIUM_MIN_COUNT: 5,
+    PREMIUM_DISCOUNT: 5,
+  },
+} as const;
