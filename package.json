@@ -1,0 +1,25 @@
+{
+  "name": "event-platform",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev:backend": "pnpm --filter backend dev",
+    "dev:frontend": "pnpm --filter frontend dev",
+    "build:backend": "pnpm --filter backend build",
+    "build:frontend": "pnpm --filter frontend build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "migrate:dev": "pnpm --filter backend migrate:dev",
+    "migrate:deploy": "pnpm --filter backend migrate:deploy"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.8.1",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}
