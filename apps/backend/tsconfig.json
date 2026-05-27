@@ -4,8 +4,10 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "incremental": true,
+    "tsBuildInfoFile": "./dist/.tsbuildinfo",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "noEmit": false,
     "paths": {
       "@event-platform/commons": ["../../packages/commons/src/index.ts"]
     }
