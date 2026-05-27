@@ -11,6 +11,7 @@ out/
 .env
 .env.local
 .env.*.local
+.secrets.env
 
 # Logs
 *.log
@@ -27,3 +28,11 @@ Thumbs.db
 
 # Prisma
 apps/backend/prisma/migrations/dev.db
+
+# AWS Cli
+aws/
+awscliv2.zip
+infra/aws-resources.env
+infra/.secrets.env
+infra/event-platform-key.pem
+apps/backend/.env
