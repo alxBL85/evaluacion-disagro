@@ -41,7 +41,7 @@ cd ../..
 }
 ```
 
-5. Configurar el AppModule
+4. Configurar el AppModule
 
 ```typescrypt
 import { Module } from '@nestjs/common'

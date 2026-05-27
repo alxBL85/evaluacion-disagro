@@ -36,3 +36,6 @@ infra/aws-resources.env
 infra/.secrets.env
 infra/event-platform-key.pem
 apps/backend/.env
+
+#Nestjs 
+tsconfig.build.tsbuildinfo
