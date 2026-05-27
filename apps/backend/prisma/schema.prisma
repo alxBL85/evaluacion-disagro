@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id             String   @id @default(cuid())
+  name           String
+  scheduledAt    DateTime
+  maxCapacity    Int
+  availableSlots Int
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  rsvps Rsvp[]
+
+  @@map("events")
+}
+
+model Rsvp {
+  id                 String    @id @default(cuid())
+  eventId            String
+  firstName          String
+  lastName           String
+  email              String
+  attendanceDate     DateTime
+  servicesDiscount   Float     @default(0)
+  productsDiscount   Float     @default(0)
+  notificationStatus String    @default("PENDING")
+  notificationSentAt DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  event      Event           @relation(fields: [eventId], references: [id])
+  selections RsvpSelection[]
+
+  @@unique([eventId, email])
+  @@map("rsvps")
+}
+
+model CatalogItem {
+  id        String   @id @default(cuid())
+  name      String
+  type      String // 'SERVICE' | 'PRODUCT'
+  price     Decimal  @db.Decimal(10, 2)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  selections RsvpSelection[]
+
+  @@map("catalog_items")
+}
+
+model RsvpSelection {
+  id            String   @id @default(cuid())
+  rsvpId        String
+  catalogItemId String
+  createdAt     DateTime @default(now())
+
+  rsvp        Rsvp        @relation(fields: [rsvpId], references: [id], onDelete: Cascade)
+  catalogItem CatalogItem @relation(fields: [catalogItemId], references: [id])
+
+  @@unique([rsvpId, catalogItemId])
+  @@map("rsvp_selections")
+}
