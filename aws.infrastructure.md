@@ -23,6 +23,10 @@ Este documento cubre:
 
 ---
 
+![Diagrama de infrastructura](infra/image.png)
+
+---
+
 luego copiar todas la variables de entorno de aws.infrastructure.md a la consola
 
 ## Crear la VPC
