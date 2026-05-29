@@ -14,7 +14,7 @@
     "baseUrl": ".",
     "composite": true,
     "paths": {
-      "@event-platform/commons": ["./packages/commons/src/index.ts"]
+      "@event-platform/commons": ["./packages/commons/dist/index.js"]
     }
   },
   "exclude": ["node_modules", "dist", ".next"]
