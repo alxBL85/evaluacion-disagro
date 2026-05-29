@@ -6,3 +6,8 @@ export interface CatalogItemDto {
   type: CatalogItemType;
   price: number;
 }
+
+export interface CatalogResponseDto {
+  services: CatalogItemDto[];
+  products: CatalogItemDto[];
+}
