@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
 import { CatalogModule } from './catalog/catalog.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { CatalogModule } from './catalog/catalog.module';
     }),
     PrismaModule,
     CatalogModule,
+    EventsModule,
   ],
 })
 export class AppModule {}
