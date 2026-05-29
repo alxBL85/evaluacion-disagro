@@ -9,7 +9,7 @@
     "experimentalDecorators": true,
     "noEmit": false,
     "paths": {
-      "@event-platform/commons": ["../../packages/commons/src/index.ts"]
+      "@event-platform/commons": ["../../packages/commons/dist/index.js"]
     }
   },
   "include": ["src/**/*"],
