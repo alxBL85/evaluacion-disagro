@@ -12,6 +12,6 @@
       "@event-platform/commons": ["../../packages/commons/src/index.ts"]
     }
   },
-  "include": ["src/**/*", "prisma/seed.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

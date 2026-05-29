@@ -39,3 +39,11 @@ apps/backend/.env
 
 #Nestjs 
 tsconfig.build.tsbuildinfo
+
+
+# Prisma Seeds
+apps/backend/prisma/*.js
+apps/backend/prisma/*.js.map
+apps/backend/prisma/*.d.ts
+apps/backend/prisma/*.d.ts.map
+
