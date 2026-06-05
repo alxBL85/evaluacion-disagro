@@ -24,7 +24,7 @@ RUN pnpm install --frozen-lockfile
 
 
 # Build backend (now commons is in node_modules with proper types)
-RUN pnpm 
+RUN pnpm install --frozen-lockfile
 RUN pnpm --filter backend build
 
 
