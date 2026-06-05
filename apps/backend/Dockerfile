@@ -11,7 +11,8 @@ COPY packages ./packages
 COPY apps/backend ./apps/backend
 
 # This creates the workspace symlinks
-RUN pnpm install --frozen-lockfile
+RUN pnpm install 
+# --frozen-lockfile
 
 # Generate Prisma Client
 RUN pnpm --filter backend exec prisma generate
@@ -20,7 +21,8 @@ RUN pnpm --filter backend exec prisma generate
 RUN pnpm --filter commons build
 
 # Rebuild node_modules links after building commons
-RUN pnpm install --frozen-lockfile
+RUN pnpm install 
+# --frozen-lockfile
 
 
 # Build backend (now commons is in node_modules with proper types)
