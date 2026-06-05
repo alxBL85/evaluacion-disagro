@@ -5,6 +5,7 @@ import { CatalogModule } from './catalog/catalog.module';
 import { EventsModule } from './events/events.module';
 import { RsvpModule } from './rsvp/rsvp.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { NotificationsModule } from './notifications/notifications.module';
     EventsModule,
     RsvpModule,
     NotificationsModule,
+    HealthModule,
   ],
 })
 export class AppModule {}

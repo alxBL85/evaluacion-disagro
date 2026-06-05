@@ -15,6 +15,12 @@ export class LoggingInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
     const request = context.switchToHttp().getRequest<FastifyRequest>();
     const { method, url } = request;
+
+    // Omitir logs de health checks
+    if (url.includes('/health')) {
+      return next.handle();
+    }
+
     const requestId =
       (request.headers['x-request-id'] as string) ?? crypto.randomUUID();
     const startTime = Date.now();
