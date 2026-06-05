@@ -34,8 +34,11 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY packages ./packages
 COPY apps/backend ./apps/backend
 
-# Install dependencies (creates node_modules with workspace symlinks)
-RUN pnpm install --frozen-lockfile --prod
+# Copy built artifacts and node_modules from builder
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/apps/backend/dist ./apps/backend/dist
+COPY --from=builder /app/apps/backend/node_modules ./apps/backend/node_modules
+COPY --from=builder /app/packages/commons/dist ./packages/commons/dist
 
 EXPOSE 3000
 
