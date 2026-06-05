@@ -20,11 +20,13 @@ RUN pnpm install --frozen-lockfile
 # Generate Prisma Client
 RUN pnpm --filter backend exec prisma generate
 
-# Build commons package first
+# Build commons package first (ensure dist is generated)
 RUN pnpm --filter commons build
 
-# Build backend
+# Verify commons dist exists and build backend with proper path resolution
+RUN pnpm --filter backend install
 RUN pnpm --filter backend build
+
 
 # Runtime stage
 FROM node:20-alpine
