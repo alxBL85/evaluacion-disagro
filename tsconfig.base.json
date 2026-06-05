@@ -13,9 +13,6 @@
     "sourceMap": true,
     "baseUrl": ".",
     "composite": true,
-    "paths": {
-      "@event-platform/commons": ["./packages/commons/dist/index.js"]
-    }
-  },
+    },
   "exclude": ["node_modules", "dist", ".next"]
 }
