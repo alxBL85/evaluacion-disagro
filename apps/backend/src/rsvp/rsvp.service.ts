@@ -11,8 +11,13 @@ import { EventsRepository } from '../events/events.repository';
 import { CatalogRepository } from '../catalog/catalog.repository';
 import { CreateRsvpBodyDto } from './create-rsvp.dto';
 import { calculateDiscounts } from './discount.helper';
-import { RsvpResponseDto, CatalogItemDto } from '@event-platform/commons';
+import {
+  RsvpResponseDto,
+  CatalogItemDto,
+  SalesNotificationMessage,
+} from '@event-platform/commons';
 import { Prisma } from '@prisma/client';
+import { SqsProducer } from '../notifications/sqs.producer';
 
 @Injectable()
 export class RsvpService {
@@ -23,6 +28,7 @@ export class RsvpService {
     private readonly rsvpRepository: RsvpRepository,
     private readonly eventsRepository: EventsRepository,
     private readonly catalogRepository: CatalogRepository,
+    private readonly sqsProducer: SqsProducer,
   ) {}
 
   async confirm(
@@ -105,6 +111,23 @@ export class RsvpService {
 
     // 6. Cargar el RSVP completo con selections para la respuesta
     const rsvpWithSelections = await this.rsvpRepository.findById(rsvp.id);
+
+    // 7. Publicar notificación de forma asíncrona — no bloquea la respuesta
+    const notification: SalesNotificationMessage = {
+      rsvpId: rsvp.id,
+      eventId: dto.eventId,
+      customerFirstName: dto.firstName,
+      customerLastName: dto.lastName,
+      customerEmail: dto.email,
+      attendanceDate: dto.attendanceDate,
+      selections: itemDtos,
+      servicesDiscount,
+      productsDiscount,
+      confirmedAt: new Date().toISOString(),
+    };
+
+    // Fire and forget — el try/catch está dentro de sendNotification
+    void this.sqsProducer.sendNotification(notification);
 
     return {
       rsvp: this.toDto(rsvpWithSelections!, itemDtos),
