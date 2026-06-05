@@ -5,6 +5,8 @@ import {
 } from '@nestjs/platform-fastify';
 import { ValidationPipe, Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
+import { GlobalExceptionFilter } from './common/filters/http-exception.filter';
+import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
@@ -28,6 +30,9 @@ async function bootstrap() {
       },
     }),
   );
+
+  app.useGlobalFilters(new GlobalExceptionFilter());
+  app.useGlobalInterceptors(new LoggingInterceptor());
 
   // CORS — permite llamadas desde el frontend en CloudFront
   app.enableCors({
