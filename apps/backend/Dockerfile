@@ -19,6 +19,10 @@ RUN pnpm --filter backend exec prisma generate
 # Build commons first
 RUN pnpm --filter commons build
 
+# Rebuild node_modules links after building commons
+RUN pnpm install --frozen-lockfile
+
+
 # Build backend (now commons is in node_modules with proper types)
 RUN pnpm --filter backend build
 
