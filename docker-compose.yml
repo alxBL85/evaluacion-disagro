@@ -17,10 +17,33 @@ services:
     environment:
       SERVICES: sqs
       DEFAULT_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
     ports:
       - "4566:4566"
     volumes:
       - localstack_data:/var/lib/localstack
+      - ./localstack-init.sh:/etc/localstack/init/ready.d/01_create_queue.sh
+
+  backend:
+    build:
+      context: .
+      dockerfile: apps/backend/Dockerfile
+    image: event-platform-backend:latest
+    container_name: event-platform-backend
+    depends_on:
+      - postgres
+      - localstack
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://eventadmin:Dbn8j6kB%23@postgres:5432/eventplatform
+      NODE_ENV: development
+      AWS_REGION: "us-east-1"
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_ENDPOINT: "http://localstack:4566"
+      SQS_QUEUE_URL: "http://localstack:4566/000000000000/sales-notifications"
 
 volumes:
   postgres_data:
